@@ -1,2 +1,4 @@
 # javarest
-java rest api
+Java REST API demonstration.
+
+The `MikhailDemo` module hosts the Spring Boot project.

@@ -12,17 +12,23 @@ import java.util.List;
 @RequestMapping("/api/employees")
 
 public class EmployeeController {
+
     @Autowired
     private EmployeeService service;
 
     @PostMapping
-    public Employee create(@Valid @RequestBody EmployeeDTO dto){
+    public Employee create(@Valid @RequestBody EmployeeDTO dto) {
         return service.createEmployee(dto);
     }
 
     @GetMapping
     public List<Employee> getAll() {
         return service.getAllEmployees();
+    }
+
+    @GetMapping("/department/{department}")
+    public List<Employee> getByDepartment(@PathVariable String department) {
+        return service.getEmployeesByDepartment(department);
     }
 
     @GetMapping("/{id}")
@@ -40,3 +46,4 @@ public class EmployeeController {
         service.deleteEmployee(id);
     }
 }
+

@@ -10,6 +10,11 @@ public interface EmployeeService{
 
     List<Employee> getAllEmployees();
 
+    /**
+     * Returns all employees working in the given department.
+     */
+    List<Employee> getEmployeesByDepartment(String department);
+
     Employee getEmployeeById(Long id);
 
     Employee updateEmployee(Long id, EmployeeDTO dto);

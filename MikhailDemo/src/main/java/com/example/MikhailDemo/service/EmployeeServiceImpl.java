@@ -3,6 +3,7 @@ package com.example.MikhailDemo.service;
 import com.example.MikhailDemo.dto.EmployeeDTO;
 import com.example.MikhailDemo.entity.Employee;
 import com.example.MikhailDemo.repository.EmployeeRepository;
+import com.example.MikhailDemo.exception.EmployeeNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployeeById(Long id) {
-        return repo.findById(id).orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
+        return repo.findById(id)
+                .orElseThrow(() -> new EmployeeNotFoundException(id));
+    }
+
+    @Override
+    public List<Employee> getEmployeesByDepartment(String department) {
+        return repo.findByDepartment(department);
     }
 
     @Override

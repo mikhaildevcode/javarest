@@ -5,7 +5,9 @@ import com.example.MikhailDemo.entity.Employee;
 import com.example.MikhailDemo.repository.EmployeeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @Service
@@ -29,7 +31,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployeeById(Long id) {
-        return repo.findById(id).orElseThrow(() -> new RuntimeException("Employee not found with id: " + id));
+        return repo.findById(id)
+                .orElseThrow(() ->
+                        new ResponseStatusException(
+                                HttpStatus.NOT_FOUND,
+                                "Employee not found with id: " + id));
     }
 
     @Override

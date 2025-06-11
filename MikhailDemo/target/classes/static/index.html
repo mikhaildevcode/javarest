@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Management</title>
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+<h1>Employee Management</h1>
+
+<section>
+    <h2>Create Employee</h2>
+    <input id="create-name" placeholder="Name">
+    <input id="create-dept" placeholder="Department">
+    <input id="create-email" placeholder="Email">
+    <button onclick="createEmployee()">Create</button>
+</section>
+
+<section>
+    <h2>Get All Employees</h2>
+    <button onclick="getAllEmployees()">Refresh</button>
+    <!-- <button id="refreshEmployees">Refresh</button> -->
+    <table id="all-table"></table>
+</section>
+
+<section>
+    <h2>Get Employee By ID</h2>
+    <input id="get-id" type="number" placeholder="ID">
+    <button onclick="getEmployee()">Get</button>
+    <pre id="get-result"></pre>
+</section>
+
+<section>
+    <h2>Update Employee</h2>
+    <input id="update-id" type="number" placeholder="ID">
+    <input id="update-name" placeholder="Name">
+    <input id="update-dept" placeholder="Department">
+    <input id="update-email" placeholder="Email">
+    <button onclick="updateEmployee()">Update</button>
+</section>
+
+<section>
+    <h2>Delete Employee</h2>
+    <input id="delete-id" type="number" placeholder="ID">
+    <button onclick="deleteEmployee()">Delete</button>
+</section>
+
+<!-- <script>
+const baseUrl = '/api/employees';
+
+function createEmployee() {
+    fetch(baseUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            name: document.getElementById('create-name').value,
+            department: document.getElementById('create-dept').value,
+            email: document.getElementById('create-email').value
+        })
+    })
+    .then(r => r.json())
+    .then(() => getAllEmployees());
+}
+
+function getAllEmployees() {
+    fetch(baseUrl)
+        .then(r => r.json())
+        .then(data => {
+            const table = document.getElementById('all-table');
+            table.innerHTML = '<tr><th>ID</th><th>Name</th><th>Department</th><th>Email</th></tr>' +
+                data.map(e => `<tr><td>${e.id}</td><td>${e.name}</td><td>${e.department}</td><td>${e.email}</td></tr>`).join('');
+        });
+}
+
+function getEmployee() {
+    const id = document.getElementById('get-id').value;
+    fetch(`${baseUrl}/${id}`)
+        .then(r => {
+            if (!r.ok) throw new Error('Not found');
+            return r.json();
+        })
+        .then(emp => {
+            document.getElementById('get-result').textContent = JSON.stringify(emp, null, 2);
+        })
+        .catch(() => {
+            document.getElementById('get-result').textContent = 'Employee not found';
+        });
+}
+
+function updateEmployee() {
+    const id = document.getElementById('update-id').value;
+    fetch(`${baseUrl}/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            name: document.getElementById('update-name').value,
+            department: document.getElementById('update-dept').value,
+            email: document.getElementById('update-email').value
+        })
+    })
+    .then(() => getAllEmployees());
+}
+
+function deleteEmployee() {
+    const id = document.getElementById('delete-id').value;
+    fetch(`${baseUrl}/${id}`, { method: 'DELETE' })
+        .then(() => getAllEmployees());
+}
+</script> -->
+
+</div>
+</body>
+</html>
